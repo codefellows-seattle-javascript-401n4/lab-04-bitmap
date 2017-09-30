@@ -2,13 +2,17 @@
 
 const colorShift = module.exports = {};
 
-colorShift.shift1 = function (array, remove, insert){
+colorShift.shift1 = function (buffer, palStart, palEnd, removeIndex) {
 
-  let newArray = array;
-  let value = array[remove];
+  if( removeIndex >= palStart && removeIndex <= palEnd) {
 
-  newArray.splice(remove, 1);
-  newArray.splice(insert, 0, value);
+    let header = buffer.slice(0, palStart);
+    let pallete = buffer.slice(palStart + 1, palEnd + 1);
+    let value = buffer.slice(removeIndex, removeIndex + 1);
+    let image = buffer.slice(palEnd + 1);
 
-  return newArray;
+    let newBuffer = header.concat(pallete, value, image);
+
+    return newBuffer;
+  }
 };
