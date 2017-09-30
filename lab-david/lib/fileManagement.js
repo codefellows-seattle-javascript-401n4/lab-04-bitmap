@@ -10,6 +10,15 @@ module.exports = {
                 resolve(data);
             });
         });
-    }
-    // saveFile: (transformedFile, savePath) => {}
+    },
+    saveFile: (transformedFile, savePath) => {
+        console.log(transformedFile);
+        return new Promise ((resolve, reject) => {
+            fs.writeFile(savePath, transformedFile, (err) => {
+                if (err) throw errorHandler(err);
+                reject(err);
+                console.log('File Saved!');
+            });
+        });
+    },
 };
