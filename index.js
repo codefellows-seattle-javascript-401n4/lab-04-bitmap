@@ -13,7 +13,5 @@ let transformBitmap = function(inputFile, outputFile, transformType) {
   file.write(newBuffer, outputFile);
 };
 
-// file.read('./_test_/asset/bitmap.bmp');
-// file.read('pooop');
-
 transformBitmap('./_test_/asset/bitmap.bmp', './_test_/asset/bitmapTest.bmp', transform.invisible);
+transformBitmap('./_test_/asset/house.bmp', './_test_/asset/houseTest.bmp', transform.invisible);
