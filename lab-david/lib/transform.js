@@ -1,12 +1,10 @@
 'use strict';
 
 const fs = require('fs');
-const errorHandler = require('../lib/errorHandler.js');
 const fileManager = require('./fileManagement.js');
 
 let parseBitMapFileInfo = (file) => {
-    return new Promise((resolve, reject) => {
-
+    return new Promise((resolve) => {
         resolve(fileManager.loadFile(file).then(file => {
             const bmp = {dibBuffer: 0};
             bmp.type = file.toString('ascii', 0, 2);
@@ -66,33 +64,39 @@ let blueScale = (bmpPreTransform, savePath) => {
     return fileManager.saveFile(bmpPreTransform.wholeFile, savePath);
 };
 
-let redScale = (bmpPreTransform, savePath) => {
+let blacken = (bmpPreTransform, savePath) => {
     for (let i = bmpPreTransform.startPalette; i < bmpPreTransform.endPalette; i +=4 ) {
-        let r = bmpPreTransform.wholeFile[i];
-        let g = bmpPreTransform.wholeFile[i + 1];
-        let b = bmpPreTransform.wholeFile[i + 2];
-        let a = bmpPreTransform.wholeFile[i + 3];
 
-        bmpPreTransform.wholeFile[i] = ((((r + g) / 2)/(256*2))* b);    
-        bmpPreTransform.wholeFile[i + 1] = ((((r + g) / 2)/(256*2))* b);
-        bmpPreTransform.wholeFile[i + 2] = b;
+        bmpPreTransform.wholeFile[i] = 0;
+        bmpPreTransform.wholeFile[i + 1] = 0;
+        bmpPreTransform.wholeFile[i + 2] = 0;
+        bmpPreTransform.wholeFile[i + 3] = 0;
+
 
 
     }
     return fileManager.saveFile(bmpPreTransform.wholeFile, savePath);
 };
 
-parseBitMapFileInfo('bitmap').then((data) => {
-    //invert(data, `${__dirname}/changed.bmp`); 
-    //greyScale(data, `${__dirname}/changed.bmp`); 
-    blueScale(data, `${__dirname}/changed.bmp`); 
-});
 
+module.exports = (userChoices) => {
+    parseBitMapFileInfo(userChoices['file']).then(data => {
+        switch(userChoices['transformation']) {
+        case 'greyScale':
+            greyScale(data, userChoices['outputName']);
+            break;
+        case 'blacken':
+            blacken(data, userChoices['outputName']);
+            break;
 
-module.exports = (fileNameToTransform,savePath) => {
-    return new Promise((resolve,reject) => {
-        parseBitMapFileInfo(fileNameToTransform).then(data => {
-            resolve(invert(data, savePath));    
-        });
+        case 'blueScale':
+            blueScale(data, userChoices['outputName']);
+            break;
+        case 'invert':
+            invert(data, userChoices['outputName']);
+            break;
+        default:
+            console.log('function did not match');
+        }
     });
-}
+};
