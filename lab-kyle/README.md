@@ -1,1 +1,1 @@
-Working with Thao and James. 
+Worked on the color-shift module with James. 
