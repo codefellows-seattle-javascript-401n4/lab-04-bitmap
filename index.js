@@ -7,13 +7,12 @@
 const file = require('./lib/file-worker.js');
 const transform = require('./lib/transformer.js');
 
-let transformBitmap = function(inputFile, outputFile, transform) {
+let transformBitmap = function(inputFile, outputFile, transformType) {
   let dataBuffer = file.read(inputFile);
-  console.log(dataBuffer);
-  // transform(dataBuffer);
+  transformType(dataBuffer);
 };
 
 // file.read('./_test_/asset/bitmap.bmp');
 // file.read('pooop');
- 
-transformBitmap('./_test_/asset/bitmap.bmp', null, null);
+
+transformBitmap('./_test_/asset/bitmap.bmp', null, transform.invisible);
