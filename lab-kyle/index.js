@@ -9,3 +9,9 @@ console.log('File Size: ' + bitmap.readUInt16LE(2));
 console.log('Offset Start: ' + bitmap.readUInt32LE(10));
 console.log('Bits Per Pxl: ' + bitmap.readUInt32LE(28));
 console.log('Number of colors: ' + bitmap.readUInt32LE(46));
+
+const newBitmap = function (){
+  fs.writeFileSync('../asset/newBitmap.bmp', colorShift.shift1(bitmap, 54, 1077, 54));
+};
+
+newBitmap();

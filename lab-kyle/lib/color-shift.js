@@ -8,10 +8,12 @@ colorShift.shift1 = function (buffer, palStart, palEnd, removeIndex) {
 
     let header = buffer.slice(0, palStart);
     let pallete = buffer.slice(palStart + 1, palEnd + 1);
-    let value = buffer.slice(removeIndex, removeIndex + 1);
     let image = buffer.slice(palEnd + 1);
+    let value = buffer.slice(removeIndex, removeIndex + 1);
 
-    let newBuffer = header.concat(pallete, value, image);
+    let list = [header, pallete, value, image];
+
+    let newBuffer = Buffer.concat(list);
 
     return newBuffer;
   }
