@@ -1,6 +1,7 @@
 'use strict';
 
 const expect = require('expect');
+const fs = require('fs');
 const file = require('./../lib/file-worker.js');
 
 describe('file.read', function(){
@@ -12,8 +13,21 @@ describe('file.read', function(){
 });
 
 describe('file.read', function(){
-  it('should return "null" if the input filepath does not exsit', function(){
+  it('should return "null" if the input filepate does not exsit', function(){
     let expected = file.read('./asset/poop.bmp');
     expect(expected).toBe(null);
   });
 });
+
+describe('file.write', function() {
+  it('should create and save a new file based on the given path', function(){
+    let testPath = './test.txt';
+    if(fs.existsSync(testPath)){
+      fs.unlinkSync(testPath);      
+    }
+    file.write(null, (testPath)); //recreating test file
+    expect(fs.existsSync(testPath)).toBe(true);
+  });
+});
+
+
