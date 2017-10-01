@@ -10,3 +10,10 @@ describe('file.read', function(){
     expect(expected).toBe(true);
   });
 });
+
+describe('file.read', function(){
+  it('should return "null" if the input filepath does not exsit', function(){
+    let expected = file.read('./asset/poop.bmp');
+    expect(expected).toBe(null);
+  });
+});
