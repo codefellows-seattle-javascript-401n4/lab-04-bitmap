@@ -1,17 +1,10 @@
 'use strict';
 
-const fs = require('fs');
-const bitmap = fs.readFileSync('../asset/bitmap.bmp');
+const readFile = require('./lib/read-file.js');
+const newBitmap = require('./lib/new-bitmap.js');
 const colorShift = require('./lib/color-shift.js');
 
-console.log('Bitmap Type: ' + bitmap.toString('ascii', 0, 2));
-console.log('File Size: ' + bitmap.readUInt32LE(2));
-console.log('Offset Start: ' + bitmap.readUInt32LE(10));
-console.log('Bits Per Pxl: ' + bitmap.readUInt32LE(28));
-console.log('Number of colors: ' + bitmap.readUInt32LE(46));
 
-const newBitmap = function (){
-  fs.writeFileSync('../asset/newBitmap.bmp', colorShift.shift1(bitmap, 54, 1077, 54));
-};
+newBitmap(colorShift.shift1(readFile('../asset/bitmap.bmp'), 54, 1077, 54), '../asset/colorshift-bitmap.bmp');
 
-newBitmap();
+newBitmap(colorShift.shift1(readFile('../asset/colorshift-bitmap.bmp'), 54, 1077, 54), '../asset/colorshift-again-bitmap.bmp');

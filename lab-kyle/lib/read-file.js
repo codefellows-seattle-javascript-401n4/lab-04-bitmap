@@ -2,9 +2,9 @@
 
 const fs = require('fs');
 
-const readFile = module.exports = function (imgUrl) {
+const readFile = module.exports = function (oldImg) {
 
-  let bitmap = fs.readFile(imgUrl);
+  let bitmap = fs.readFileSync(oldImg);
 
   console.log('Bitmap Type: ' + bitmap.toString('ascii', 0, 2));
   console.log('File Size: ' + bitmap.readUInt32LE(2));
