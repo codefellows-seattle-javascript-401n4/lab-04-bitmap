@@ -20,12 +20,12 @@ describe('file.read', function(){
 });
 
 describe('file.write', function() {
+  let testPath = './test2.txt';
+  if(fs.existsSync(testPath)){
+    fs.unlinkSync(testPath);      
+  }
+  file.write(null, (testPath)); //recreating test file
   it('should create and save a new file based on the given path', function(){
-    let testPath = './test.txt';
-    if(fs.existsSync(testPath)){
-      fs.unlinkSync(testPath);      
-    }
-    file.write(null, (testPath)); //recreating test file
     expect(fs.existsSync(testPath)).toBe(true);
   });
 });
