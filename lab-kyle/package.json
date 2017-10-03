@@ -1,0 +1,26 @@
+{
+  "name": "lab-kyle",
+  "version": "0.0.1",
+  "description": "Lab 4 Bitmap",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krichey15/lab-04-bitmap.git"
+  },
+  "author": "richey.kyle.i@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krichey15/lab-04-bitmap/issues"
+  },
+  "homepage": "https://github.com/krichey15/lab-04-bitmap#readme",
+  "devDependencies": {
+    "expect": "^21.2.1",
+    "mocha": "^3.5.3"
+  }
+}
