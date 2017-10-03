@@ -1,0 +1,26 @@
+{
+  "name": "lab-04-bitmap",
+  "version": "0.0.1",
+  "description": "ashkaan's lab-04",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goozgooz/lab-04-bitmap.git"
+  },
+  "author": "ashkaan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/goozgooz/lab-04-bitmap/issues"
+  },
+  "homepage": "https://github.com/goozgooz/lab-04-bitmap#readme",
+  "dependencies": {
+    "expect": "^21.2.1",
+    "mocha": "^3.5.3"
+  }
+}
