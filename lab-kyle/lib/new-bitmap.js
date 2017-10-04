@@ -8,4 +8,7 @@ const newBitmap = module.exports = function(transformFunction, newImgUrl){
   writeFile(newImgUrl, transform);
 
   console.log(newImgUrl + ': Successfully Created');
+  let done = 'success';
+
+  return done;
 };
