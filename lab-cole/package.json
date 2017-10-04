@@ -1,0 +1,20 @@
+{
+  "name": "lab-cole",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.8.0",
+    "expect": "^21.2.1",
+    "mocha": "^3.5.3"
+  },
+  "dependencies": {
+    "jimp": "^0.2.28"
+  }
+}
+
