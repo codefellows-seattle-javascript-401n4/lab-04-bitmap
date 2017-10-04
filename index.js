@@ -4,18 +4,14 @@ const fileReader = require('./lib/print-files.js');
 const readline = require('readline');
 const fileList = process.argv.slice(2);
 const bitMap = require('./lib/bitMap.js')
-
-//Using a promise
-// fileReader.getFiles('/../data/file1.txt', '/../data/file2.txt', '/../data/file3.txt');
-// //using a callback
-// fileReader.getFilesCB(['/../data/file1.txt', '/../data/file2.txt', '/../data/file3.txt']);
+const tranform = require('./lib/transformation.js')
 
 fileReader.readFilesInOrder(fileList, function(err, data) {
   if (err) throw err;
-  data.forEach((content => {
-    let newbitMap = new bitMap(content);
-    newbitMap.setAll('green', 25);
-    newbitMap.changeAll('blue', 'divide', 2)
-    newbitMap.write()
-  }));
+  data.forEach((content, index) => {
+    tranform.average(content, 'file_' + index)
+    tranform.luminosity(content, 'file_' + index)
+    tranform.lightness(content, 'file_' + index)
+    tranform.toBlue(content, 'file_' + index)
+  })
 });
