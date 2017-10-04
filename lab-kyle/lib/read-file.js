@@ -11,7 +11,7 @@ const readFile = module.exports = function (oldImg) {
   console.log('Offset Start: ' + bitmap.readUInt32LE(10));
   console.log('Bits Per Pxl: ' + bitmap.readUInt32LE(28));
   console.log('Number of colors: ' + bitmap.readUInt32LE(46));
-  
+
   return bitmap;
 
 };
