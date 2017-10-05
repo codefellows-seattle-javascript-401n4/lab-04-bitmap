@@ -10,12 +10,10 @@ const validateArgs = require('./lib/validate.js');
 
 const cli_args = process.argv;
 const transformOptions = ['invert', 'randomize', 'grayscale', 'blueify', 'redify', 'greenify'];
-const path = '/Users/paulamookerjee/Code_Fellows/lab-04-bitmap/lab-paula/lab-04-bitmap/';
-
 
 let doAllTheThings = module.exports = () => {
 
-  let oldfile = cli_args[2];
+  let fileName = cli_args[2];
   let newfile = cli_args[3];
   let option = cli_args[4];
 
@@ -27,13 +25,13 @@ let doAllTheThings = module.exports = () => {
       const bmp = new bpMeta(bitmap);
       const buff = transform(option, bitmap, bmp);
 
-      writeFile(path, newfile, option, buff, function (err) {
+      writeFile(newfile, option, buff, function (err) {
         if(err) console.log(err);
       });
     }
   };
 
-  readFile(path, oldfile, manipulateBitmap);
+  readFile(fileName, manipulateBitmap);
 };
 
 if(!validateArgs(cli_args, transformOptions)) { process.exit(1); }
