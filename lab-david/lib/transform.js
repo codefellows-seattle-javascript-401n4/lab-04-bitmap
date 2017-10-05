@@ -2,9 +2,10 @@
 
 const fs = require('fs');
 const fileManager = require('./fileManagement.js');
+const errorHandler = require('./errorHandler.js');
 
 let parseBitMapFileInfo = (file) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         resolve(fileManager.loadFile(file).then(file => {
             const bmp = {dibBuffer: 0};
             bmp.type = file.toString('ascii', 0, 2);
@@ -16,7 +17,7 @@ let parseBitMapFileInfo = (file) => {
             bmp.bitsPerPixel = file.readUInt16LE(28);
             bmp.wholeFile = file;
             return bmp;
-        }));
+        })).catch(err => reject(err));
     });
 };
 
@@ -80,23 +81,27 @@ let blacken = (bmpPreTransform, savePath) => {
 
 
 module.exports = (userChoices) => {
-    parseBitMapFileInfo(userChoices['file']).then(data => {
+    parseBitMapFileInfo(userChoices['fileToTransform']).then(data => {
         switch(userChoices['transformation']) {
         case 'greyScale':
-            greyScale(data, userChoices['outputName']);
+            greyScale(data, userChoices['newFilePath']);
             break;
         case 'blacken':
-            blacken(data, userChoices['outputName']);
+            blacken(data, userChoices['newFilePath']);
             break;
 
         case 'blueScale':
-            blueScale(data, userChoices['outputName']);
+            blueScale(data, userChoices['newFilePath']);
             break;
         case 'invert':
-            invert(data, userChoices['outputName']);
+            invert(data, userChoices['newFilePath']);
             break;
         default:
-            console.log('function did not match');
+            console.log(`\nThe function you typed did not match your options:
+                greyScale, blacken, blueScale, invert.
+
+                Please try again.
+            `);
         }
-    });
+    }).catch(err => console.log(err));
 };
