@@ -22,6 +22,7 @@ if (process.argv[3] === 'scale') {
   transformSelect = colorScale.random;
 
 } else {
+
   transformSelect = null;
   
 }
