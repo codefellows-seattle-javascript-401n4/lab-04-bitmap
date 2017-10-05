@@ -7,9 +7,9 @@ describe('read file module', function(){
 
   it('should read any bitmap file it is given', function(){
 
-    var theFile = readFile('../asset/house.bmp');
+    let theFile = readFile('../asset/house.bmp');
 
-    expect(theFile).toBe(new Buffer([Array]));
+    expect(theFile).toEqual(new Buffer([Array]));
 
   });
 
