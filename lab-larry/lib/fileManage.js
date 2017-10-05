@@ -10,14 +10,12 @@ module.exports = {
       });
     });
   },
-  saveFile: (fileName, fileNew) => {
+  saveFile: (fileName, file) => {
     return new Promise((resolve, reject) => {
-      fs.writeFile(`${fileName}.bmp`, fileNew, (err) => {
+      fs.writeFile(`${fileName}.bmp`, file, (err) => {
         if (err) reject(err);
         resolve('The file has been saved!');
       });
     })
   }
-
-
 };
