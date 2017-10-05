@@ -6,25 +6,30 @@ const bitmapFileRead = require('./lib/read-write.js');
 const bitmap = require('./lib/bitmap.js');
 const filepath = process.argv[2];
 let outputPath = './asset/output.bmp';
-let typeOfTransform;
+let transformSelect;
 
-switch (process.argv[3]) {
-case 'scale':
-  typeOfTransform = colorScale.scale;
-  break;
-case 'invert':
-  typeOfTransform = colorScale.invert;
-  break;
-case 'random':
-  typeOfTransform = colorScale.random;
-  break;
-default:
-  typeOfTransform = null;
-  break;
+
+if (process.argv[3] === 'scale') {
+
+  transformSelect = colorScale.scale;
+
+} else if (process.argv[3] === 'invert') {
+  
+  transformSelect = colorScale.invert;
+
+}else if (process.argv[3] === 'random') {
+  
+  transformSelect = colorScale.random;
+
+} else {
+  transformSelect = null;
+  
 }
 
-if(typeOfTransform) {
-  bitmapFileRead.read(filepath, outputPath, typeOfTransform, bitmapFileRead.write);
+  
+
+if(transformSelect) {
+  bitmapFileRead.read(filepath, outputPath, transformSelect, bitmapFileRead.write);
 } else {
-  console.log('Incorrect Input');
+  console.log('Input incorrect please try again.');
 }
