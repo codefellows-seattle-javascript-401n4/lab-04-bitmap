@@ -3,11 +3,10 @@
 let bitmap = require('./lib/bitmap.js');
 
 let convertImage = (file) => {
-  bitmap.readFromFile(file, (data) => {
-      console.log(file);
-      console.log(data);      
+  bitmap.readFromFile(file, (data) => {  
     let img = new bitmap.Image(data, file);
-    img.invertImg();
+    console.log(img.colorTable);
+    img.grayImg();
   });
 };
 
