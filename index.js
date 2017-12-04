@@ -2,15 +2,16 @@
 
 
 
-const readFile = require('./lib/read-file.js');
-const writeFile = require('./lib/write-file.js');
-const colorHue = require('./lib/color-hue.js')
+const file = require('./lib/file.js');
+const transform = require('./lib/transformer.js');
 
 
-const newBitMap(oldBit, transform, newBit, ...args) => {
-  let read = readFile(oldBit);
-  let transform = transform(read, ...args);
+transformBitmap('./_test_/asset/bitmap.bmp', './_test_/asset/bitmapTest.bmp', transform.white);
+transformBitmap('./_test_/asset/finger-print.bmp', './_test_/asset/finger-print.bmp', transform.white);
 
-  writeFile(newBit, transform);
 
+let transformBitmap = function (inputFile, outputFile, transformType) {
+  let dataBuffer = file.read(inputFile);
+  let newBuffer = transformType(dataBuffer);
+  file.write(newBuffer, outputFile);
 };
