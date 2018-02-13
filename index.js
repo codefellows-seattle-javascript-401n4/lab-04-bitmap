@@ -2,16 +2,39 @@
 
 
 
-const file = require('./lib/file.js');
-const transform = require('./lib/transformer.js');
+const readFile = require('./lib/readFile.js');
+const writeFile = require('./lib/writeFile.js');
+const bpMeta = require('./lib/metaConstr.js');
+const transform = require('./lib/transform.js');
+const validateArgs = require('./lib/validate.js');
 
-transformBitmap('../test/asset/bitmap.bmp', './test/asset/bitmapTest.bmp', transform.white);
-transformBitmap('../test/asset/finger-print.bmp', './_test_/asset/finger-print.bmp', transform.white);
+const cli_args = process.argv;
+const transformOptions = ['invert', 'randomize', 'grayscale', 'blueify', 'redify', 'greenify'];
 
 
 
-let transformBitmap = function (inputFile, outputFile, transformType) {
-  let dataBuffer = file.read(inputFile);
-  let newBuffer = transformType(dataBuffer);
-  file.write(newBuffer, outputFile);
+let doAllTheThings = module.exports = () => {
+
+  let fileName = cli_args[2];
+  let newfile = cli_args[3];
+  let option = cli_args[4];
+
+
+  let manipulateBitmap = (err, data) => {
+    if(err) { throw(err);}
+    else {
+      const bitmap = data;
+      const bmp = new bpMeta(bitmap);
+      const buff = transform(option, bitmap, bmp);
+
+      writeFile(newfile, option, buff, function (err) {
+        if(err) console.log(err);
+      });
+    }
+  };
+
+  readFile(fileName, manipulateBitmap);
 };
+
+if(!validateArgs(cli_args, transformOptions)) { process.exit(1); }
+doAllTheThings();
