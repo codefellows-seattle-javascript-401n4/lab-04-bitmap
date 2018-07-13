@@ -1,0 +1,15 @@
+{
+  "name": "lab-brian",
+  "version": "1.0.0",
+  "description": "![CF](https://camo.githubusercontent.com/70edab54bba80edb7493cad3135e9606781cbb6b/687474703a2f2f692e696d6775722e636f6d2f377635415363382e706e67) Lab 04: Bitmap Transformer ===",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "brian namgung",
+  "license": "ISC",
+  "devDependencies": {
+    "expect": "^21.2.1",
+    "mocha": "^3.5.3"
+  }
+}
